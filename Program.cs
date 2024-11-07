@@ -29,7 +29,7 @@ namespace MyApp
             //var mixsyntex = (from i in list select i).Max();
             //Console.WriteLine(mixsyntex.ToString());
 
-            List<Employee> employees = new List<Employee>() 
+            List<Employee> employees = new List<Employee>()
             {
                 new Employee(){Id=1,Name="Fagun",Email="fagun@gmail.com"},
                 new Employee(){Id=2,Name="Mamun",Email="mamun@gmail.com"},
@@ -57,24 +57,50 @@ namespace MyApp
 
             /// Different operation
 
-            var selectQueray = (from emp in employees
-                                select new Student()
-                                {
-                                    StudentId = emp.Id,
-                                    FullName = emp.Name,
-                                    SEmail = emp.Email,
-                                });
+            //    var selectQueray = (from emp in employees
+            //                        select new Student()
+            //                        {
+            //                            StudentId = emp.Id,
+            //                            FullName = emp.Name,
+            //                            SEmail = emp.Email,
+            //                        });
 
-            var selectMathod = employees.Select(emp=>new Student()
-            {
-                StudentId=emp.Id,
-                FullName = emp.Name,
-                SEmail = emp.Email,
-            }).ToList();
+            //    var selectMathod = employees.Select(emp=>new Student()
+            //    {
+            //        StudentId=emp.Id,
+            //        FullName = emp.Name,
+            //        SEmail = emp.Email,
+            //    }).ToList();
 
-            foreach(var emp in selectMathod )
+            //    foreach(var emp in selectMathod )
+            //    {
+            //        Console.WriteLine($"Id  = {emp.StudentId}, Name = {emp.FullName}, {emp.SEmail}");
+            //    }
+
+            //Sorting 
+
+            List<int> list = new List<int>() { 6, 1, 2, 3, 4, 7, 8, 9, 5};
+
+            var QuerySyntex = (from i in list 
+                       orderby i
+                       select i).ToList(); 
+            var MathodSyntex = list.OrderByDescending(i => i).ToList();
+
+            foreach (var i in MathodSyntex)
             {
-                Console.WriteLine($"Id  = {emp.StudentId}, Name = {emp.FullName}, {emp.SEmail}");
+                Console.WriteLine(i);
+            }
+
+            //sorting in object;
+            var sortobj = (from i in employees
+                           orderby i.Name descending
+                           select i);
+
+
+
+            foreach(var emp in sortobj)
+            {
+                Console.WriteLine($"Id  = {emp.Id}, Name = {emp.Name}");
             }
 
         }
