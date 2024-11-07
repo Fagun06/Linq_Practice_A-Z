@@ -180,15 +180,25 @@ namespace MyApp
             };
 
 
-            var ms = students.Select(student => student.name).Distinct().ToList();
+            //var ms = students.Select(student => student.name).Distinct().ToList();
             
 
             //var res = students.Contains(new student() { Id = 1, name = "Fagun" });
             //Console.WriteLine(res);
 
             List<int> list = new List<int>() { 1,1,1,2,2,3,4,5,5,5};
-            var ns = list.Distinct().ToList();
-            var qs = (from i in ns select i).ToList();
+            //var ns = list.Distinct().ToList();
+            //var qs = (from i in ns select i).ToList();
+            
+            //practice take
+
+            //var ms = list.Where(x=>x>2).Take(5).ToList();
+            //var qs = (from i in list select i).Take(5).ToList();
+
+            //practice skip
+
+            var ms = list.Where(x=>x>2).Skip(2).ToList();
+            var qs = (from i in list select i).Skip(3).ToList();
 
             foreach(var i in ms)
             {
