@@ -1,4 +1,5 @@
-﻿using System;
+﻿using C_Sharp;
+using System;
 using System.ComponentModel;
 namespace MyApp
 {
@@ -30,27 +31,59 @@ namespace MyApp
 
             List<Employee> employees = new List<Employee>() 
             {
-                new Employee(){Id=1,Name="Fagun"},
-                new Employee(){Id=2,Name="Mamun"},
-                new Employee(){Id=3,Name="Enayet"}
+                new Employee(){Id=1,Name="Fagun",Email="fagun@gmail.com"},
+                new Employee(){Id=2,Name="Mamun",Email="mamun@gmail.com"},
+                new Employee(){Id=3,Name="Enayet",Email="enayet@gmail.com"}
             };
 
-            IEnumerable<Employee> query = from emp in employees where emp.Id==1 select emp;
+            //IEnumerable<Employee> query = from emp in employees where emp.Id==1 select emp;
 
-            IQueryable<Employee> query1 = employees.AsQueryable().Where(x=>x.Id==1);
+            //IQueryable<Employee> query1 = employees.AsQueryable().Where(x=>x.Id==1);
 
-            foreach(Employee emp in query1)
+            //foreach(Employee emp in query1)
+            //{
+            //    Console.WriteLine("Id : " + emp.Id + " Name : " + emp.Name);
+            //}
+
+            //var basicQuery = (from emp in employees select emp).ToList();
+            //var basicMathod = employees.ToList();
+
+            //var basicPropQuery = from emp in employees select emp.Id+1;
+
+            //foreach (var emp in basicMathod)
+            //{
+            //    Console.WriteLine($"Id  = {emp.Id}, Name = {emp.Name}");
+            //}
+
+            /// Different operation
+
+            var selectQueray = (from emp in employees
+                                select new Student()
+                                {
+                                    StudentId = emp.Id,
+                                    FullName = emp.Name,
+                                    SEmail = emp.Email,
+                                });
+
+            var selectMathod = employees.Select(emp=>new Student()
             {
-                Console.WriteLine("Id : " + emp.Id + " Name : " + emp.Name);
+                StudentId=emp.Id,
+                FullName = emp.Name,
+                SEmail = emp.Email,
+            }).ToList();
+
+            foreach(var emp in selectMathod )
+            {
+                Console.WriteLine($"Id  = {emp.StudentId}, Name = {emp.FullName}, {emp.SEmail}");
             }
 
         }
 
-        class Employee
-        {
-            public int Id { get; set; }
-            public string Name { get; set; }
-        }
+        //class Employee
+        //{
+        //    public int Id { get; set; }
+        //    public string Name { get; set; }
+        //}
 
     }
 }
