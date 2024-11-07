@@ -79,28 +79,36 @@ namespace MyApp
 
             //Sorting 
 
-            List<int> list = new List<int>() { 6, 1, 2, 3, 4, 7, 8, 9, 5};
+            //List<int> list = new List<int>() { 6, 1, 2, 3, 4, 7, 8, 9, 5};
 
-            var QuerySyntex = (from i in list 
-                       orderby i
-                       select i).ToList(); 
-            var MathodSyntex = list.OrderByDescending(i => i).ToList();
+            //var QuerySyntex = (from i in list 
+            //           orderby i
+            //           select i).ToList(); 
+            //var MathodSyntex = list.OrderByDescending(i => i).ToList();
 
-            foreach (var i in MathodSyntex)
+            //foreach (var i in MathodSyntex)
+            //{
+            //    Console.WriteLine(i);
+            //}
+
+            ////sorting in object;
+            //var sortobj = (from i in employees
+            //               orderby i.Name descending
+            //               select i);
+
+
+
+            //foreach(var emp in sortobj)
+            //{
+            //    Console.WriteLine($"Id  = {emp.Id}, Name = {emp.Name}");
+            //}
+            
+            var f = employees.Any(e => e.Id > 3);
+
+            var qs = (from i in employees select i).Any(x => x.Id > 2);
+            if(qs)
             {
-                Console.WriteLine(i);
-            }
-
-            //sorting in object;
-            var sortobj = (from i in employees
-                           orderby i.Name descending
-                           select i);
-
-
-
-            foreach(var emp in sortobj)
-            {
-                Console.WriteLine($"Id  = {emp.Id}, Name = {emp.Name}");
+                Console.WriteLine("Yes");
             }
 
         }
