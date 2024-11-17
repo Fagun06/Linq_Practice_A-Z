@@ -171,13 +171,13 @@ namespace MyApp
 
             //Console.WriteLine(result);
 
-            List<student> students = new List<student>()
-            {
-                new student() {Id=1,name="Fagun"},
-                new student() {Id=2,name="Mamun"},
-                new student() {Id=3,name="Fagun"},
-                new student() {Id=4,name="Mamun"}
-            };
+            //List<student> students = new List<student>()
+            //{
+            //    new student() {Id=1,name="Fagun"},
+            //    new student() {Id=2,name="Mamun"},
+            //    new student() {Id=3,name="Fagun"},
+            //    new student() {Id=4,name="Mamun"}
+            //};
 
 
             //var ms = students.Select(student => student.name).Distinct().ToList();
@@ -186,7 +186,7 @@ namespace MyApp
             //var res = students.Contains(new student() { Id = 1, name = "Fagun" });
             //Console.WriteLine(res);
 
-            List<int> list = new List<int>() { 1,1,1,2,2,3,4,5,5,5};
+            //List<int> list = new List<int>() { 1,1,1,2,2,3,4,5,5,5};
             //var ns = list.Distinct().ToList();
             //var qs = (from i in ns select i).ToList();
             
@@ -197,23 +197,53 @@ namespace MyApp
 
             //practice skip
 
-            var ms = list.Where(x=>x>2).Skip(2).ToList();
-            var qs = (from i in list select i).Skip(3).ToList();
+            //var ms = list.Where(x=>x>2).Skip(2).ToList();
+            //var qs = (from i in list select i).Skip(3).ToList();
 
-            foreach(var i in ms)
+            //foreach(var i in ms)
+            //{
+            //    Console.WriteLine(i);
+            //}
+
+            var students = new List<Students>()
             {
-                Console.WriteLine(i);
-            }
+                new Students() {Id = 1, Name ="A" , AddressId=1},
+                new Students() {Id = 2, Name ="B" , AddressId=0},
+                new Students() {Id = 3, Name ="C" , AddressId=2},
+                new Students() {Id = 4, Name ="D" , AddressId=0},
+                new Students() {Id = 5, Name ="E" , AddressId=3},
+            };
+
+            var addresses = new List<Address>()
+            {
+                new Address() {Id = 1, AddressLine="Line 1"},
+                new Address() {Id = 2, AddressLine="Line 2"},
+                new Address() {Id = 3, AddressLine="Line 3"},
+                new Address() {Id = 4, AddressLine="Line 4"},
+                new Address() {Id = 5, AddressLine="Line 5"},
+
+            };
+
+            var qs = (from student in students
+                     join address in addresses
+                     on student.AddressId equals address.Id
+                     select new
+                     {
+                         studentName = student.Name,
+                         Line = address.AddressLine,
+                     }).ToList();
+
+            Console.WriteLine(qs);
 
         }
 
-        class student
-        {
+        //class student
+        //{
 
-            public int Id;
-            public string name;
+        //    public int Id;
+        //    public string name;
             
-        }
+        //}
         //class Employee
         //{
         //    public int Id { get; set; }
