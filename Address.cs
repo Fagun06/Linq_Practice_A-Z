@@ -10,6 +10,6 @@ namespace C_Sharp
     {
         public int Id { get; set; }
 
-        public string AddressLine { get; set; }
+        public string name { get; set; }
     }
 }

@@ -205,50 +205,89 @@ namespace MyApp
             //    Console.WriteLine(i);
             //}
 
-            var students = new List<Students>()
+            //var students = new List<Students>()
+            //{
+            //    new Students() {Id = 1, Name ="A" , AddressId=1},
+            //    new Students() {Id = 2, Name ="B" , AddressId=0},
+            //    new Students() {Id = 3, Name ="C" , AddressId=2},
+            //    new Students() {Id = 4, Name ="D" , AddressId=0},
+            //    new Students() {Id = 5, Name ="E" , AddressId=3},
+            //};
+
+            //var addresses = new List<Address>()
+            //{
+            //    new Address() {Id = 1, AddressLine="Line 1"},
+            //    new Address() {Id = 2, AddressLine="Line 2"},
+            //    new Address() {Id = 3, AddressLine="Line 3"},
+            //    new Address() {Id = 4, AddressLine="Line 4"},
+            //    new Address() {Id = 5, AddressLine="Line 5"},
+
+            //};
+
+            //var qs = (from student in students
+            //         join address in addresses
+            //         on student.AddressId equals address.Id
+            //         select new
+            //         {
+            //             studentName = student.Name,
+            //             Line = address.AddressLine,
+            //         }).ToList();
+
+            //Console.WriteLine(qs);
+
+
+            var student = new List<students> ()
             {
-                new Students() {Id = 1, Name ="A" , AddressId=1},
-                new Students() {Id = 2, Name ="B" , AddressId=0},
-                new Students() {Id = 3, Name ="C" , AddressId=2},
-                new Students() {Id = 4, Name ="D" , AddressId=0},
-                new Students() {Id = 5, Name ="E" , AddressId=3},
+               new students {Id=1, Name="A", CategoryId=1},
+               new students {Id=2, Name="B", CategoryId=1},
+               new students {Id=3, Name="C"},
+               new students {Id=4, Name="D", CategoryId=3},
+               new students {Id=5, Name="E", CategoryId=5},
+
             };
 
-            var addresses = new List<Address>()
+            var category = new List<category>
             {
-                new Address() {Id = 1, AddressLine="Line 1"},
-                new Address() {Id = 2, AddressLine="Line 2"},
-                new Address() {Id = 3, AddressLine="Line 3"},
-                new Address() {Id = 4, AddressLine="Line 4"},
-                new Address() {Id = 5, AddressLine="Line 5"},
-
+                new category {CatId=1,CatName="Monitor"},
+                new category {CatId=2,CatName="Desciple"},
+                new category {CatId=3,CatName="Nothing"},
             };
 
-            var qs = (from student in students
-                     join address in addresses
-                     on student.AddressId equals address.Id
-                     select new
-                     {
-                         studentName = student.Name,
-                         Line = address.AddressLine,
-                     }).ToList();
+            var qs = (from std in student
+                     join c in category
+                     on std.CategoryId equals c.CatId into stdGrop
+                     from studentGrop in stdGrop.DefaultIfEmpty()
+                     select new { studentName = std.Name , CategoryName = studentGrop !=null ? studentGrop.CatName : "NA"  }).ToList();
 
-            Console.WriteLine(qs);
+            //foreach(var item in  qs)
+            //{
+            //    Console.WriteLine(item.c.CatName + "=>");
+
+            //    foreach(var c in item.stdGrop)
+            //    {
+            //        Console.WriteLine(c.Name);
+            //    }
+            //}
+
+            Console.WriteLine();
+
 
         }
 
-        //class student
-        //{
+        class students
+        {
 
-        //    public int Id;
-        //    public string name;
-            
-        //}
-        //class Employee
-        //{
-        //    public int Id { get; set; }
-        //    public string Name { get; set; }
-        //}
+            public int Id;
+            public string Name;
+            public int CategoryId;
+
+
+        }
+        class category
+        {
+            public int CatId { get; set; }
+            public string CatName { get; set; }
+        }
 
     }
 }
